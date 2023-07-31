@@ -1,7 +1,7 @@
 import React from 'react';
 import {Outlet} from "react-router-dom";
 import {Box} from "@mui/material";
-import Navbar from "../Navbar.tsx";
+import Navbar from "../../Navbar.tsx";
 
 const RootLayout: React.FC = () => {
     return (

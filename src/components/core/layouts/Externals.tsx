@@ -1,7 +1,7 @@
 import React, {Suspense} from "react";
 import {ErrorBoundary} from "react-error-boundary";
-import PageNotFoundFallback from "../fallback/PageNotFoundFallback.tsx";
-
+import ErrorFallback from "../fallback/ErrorFallback.tsx";
+import LoadingFallback from "../fallback/LoadingFallback.tsx";
 
 interface IProps {
     children: React.ReactNode;
@@ -9,9 +9,9 @@ interface IProps {
 const Externals: React.FC<IProps> = ({children}) => {
     return (
         <Suspense
-            fallback="loading...."
+            fallback={<LoadingFallback />}
         >
-            <ErrorBoundary fallback={<PageNotFoundFallback />} >
+            <ErrorBoundary fallback={<ErrorFallback />} >
                 { children }
             </ErrorBoundary>
         </Suspense>

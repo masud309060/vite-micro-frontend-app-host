@@ -1,14 +1,14 @@
-import React, {Suspense} from "react";
-import RootLayout from "./components/layouts/RootLayout.tsx";
+import React from "react";
+import {lazily} from "react-lazily";
+import RootLayout from "./components/core/layouts/RootLayout.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import PublicPage from "./components/Public/PublicPage.tsx";
+import Externals from "./components/core/layouts/Externals.tsx";
 
+const PublicPage = React.lazy(() => import('./components/Public/PublicPage.tsx'));
 
-const CountButton = React.lazy(() => import('remoteAppOne/CountButton'));
-// @ts-ignore
-const Dashboard = React.lazy(() => import('dashboard/Dashboard'));
-// @ts-ignore
-const Contact = React.lazy(() => import('contact/Contact'));
+const {CountButton} = lazily(() => import("remoteAppOne/CountButton"));
+const {Dashboard} = lazily(() => import("dashboard/Dashboard"));
+const {Contact} = lazily(() => import("contact/Contact"));
 
 const router = createBrowserRouter([
     {
@@ -17,15 +17,19 @@ const router = createBrowserRouter([
         children: [
             {
                 path: "/",
-                element: <Suspense fallback={"Loading..."}><PublicPage/></Suspense>,
+                element: <Externals><PublicPage/></Externals>,
             },
             {
                 path: "/dashboard",
-                element: <Suspense fallback={"Loading..."}><Dashboard/></Suspense>,
+                element: <Externals><Dashboard/></Externals>,
             },
             {
                 path: "/contact",
-                element: <Suspense fallback={"Loading..."}><Contact/></Suspense>,
+                element: <Externals><Contact/></Externals>,
+            },
+            {
+                path: "/button",
+                element: <Externals><CountButton/></Externals>,
             },
             {
                 path: "/*",
@@ -42,8 +46,6 @@ function App() {
     return (
         <>
             <RouterProvider router={router}/>
-
-            <CountButton />
         </>
     )
 }

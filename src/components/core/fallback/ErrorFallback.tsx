@@ -8,7 +8,7 @@ interface IProps {
         message?: string
     }
 }
-const PageNotFoundFallback: React.FC<IProps> = ({error}) => {
+const ErrorFallback: React.FC<IProps> = ({error}) => {
     const { resetBoundary } = useErrorBoundary();
 
     return (
@@ -26,4 +26,4 @@ const PageNotFoundFallback: React.FC<IProps> = ({error}) => {
     );
 };
 
-export default PageNotFoundFallback;
+export default ErrorFallback;
