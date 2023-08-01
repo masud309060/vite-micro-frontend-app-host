@@ -1,14 +1,12 @@
 import React from "react";
-import {lazily} from "react-lazily";
-import RootLayout from "./components/core/layouts/RootLayout.tsx";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import RootLayout from "./components/core/layouts/RootLayout.tsx";
 import Externals from "./components/core/layouts/Externals.tsx";
 
 const PublicPage = React.lazy(() => import('./components/Public/PublicPage.tsx'));
-
-const {CountButton} = lazily(() => import("remoteAppOne/CountButton"));
-const {Dashboard} = lazily(() => import("dashboard/Dashboard"));
-const {Contact} = lazily(() => import("contact/Contact"));
+const CountButton = React.lazy(() => import("remoteAppOne/CountButton"));
+const Dashboard = React.lazy(() => import("dashboard/Dashboard"))
+const Contact = React.lazy(() => import("contact/Contact"));
 
 const router = createBrowserRouter([
     {
