@@ -51,6 +51,8 @@ const router = createBrowserRouter([
 
 function App() {
 
+    console.log(import.meta.env.VITE_PRODUCTION_MODE) // 123
+
     return (
         <>
             <RouterProvider router={router}/>
