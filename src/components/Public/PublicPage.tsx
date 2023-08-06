@@ -1,8 +1,37 @@
 import React, {useEffect} from 'react';
 import {Link} from "react-router-dom";
 import {Box, Button, Container, Stack, Typography} from "@mui/material";
+import {useDispatch, useSelector} from "react-redux";
+import {selectFolderState} from "../../state/features/folder/folderSelector.ts";
+import {getFolders} from "../../state/features/folder/folderSlice.ts";
 
 const PublicPage: React.FC = () => {
+
+    const dispatch = useDispatch();
+    const {data, isLoading} = useSelector(selectFolderState);
+
+    useEffect(() => {
+        dispatch(getFolders({currentPage: 1, limit: 10}))
+    }, [])
+
+
+    console.log({data, isLoading})
+
+    let content: any = null;
+    if(isLoading) {
+        content = "Loading...";
+    } else if(data?.length > 0) {
+        content = (
+            <ul>
+                {data.map(folder => (
+                    <li key={folder.id}>
+                        {folder.name}
+                    </li>
+                ))}
+            </ul>
+        )
+    }
+
 
     useEffect(() => {
         return () => console.log("Public page unmount")
@@ -11,6 +40,8 @@ const PublicPage: React.FC = () => {
     return (
         <Container maxWidth={"lg"}>
             <Box sx={{ width: '100%' }}>
+                {content}
+
                 <Typography variant="h1" gutterBottom>
                     h1. Heading
                 </Typography>

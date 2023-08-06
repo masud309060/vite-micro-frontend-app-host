@@ -19,7 +19,8 @@ export default ({ mode }) => {
                     dashboard: `${VITE_DASHBOARD_APP}/assets/remoteEntry.js`,
                     contact: `${VITE_CONTACT_APP}/assets/remoteEntry.js`,
                 },
-                shared: ['react', 'react-dom', 'react-router-dom']
+                shared: ['react', 'react-dom', 'react-router-dom', 'react-redux']
+
             })
         ],
         build:{
